@@ -20,6 +20,11 @@ public class Score : MonoBehaviour
 
     int player1Score = 0;
     int player2Score = 0;
+    public GameObject EndScreen;
+    Text EndText;
+    string player1win = "GAME OVER \n Blue Wins!";
+    string player2win = "GAME OVER \n Pink Wins!";
+    
 
 
 
@@ -34,9 +39,14 @@ public class Score : MonoBehaviour
 
         //setting the score in the text objects
 
-        player1Text.text = "Blue \n" + player1Score;
-        player2Text.text = "Pink \n" + player2Score;
+        player1Text.text = "Blue\n" + player1Score;
+        player2Text.text = "Pink\n" + player2Score;
         
+
+        //getting the text for the end screen
+        EndText = EndScreen.GetComponent<Text>();
+
+
 
     }
 
@@ -45,4 +55,44 @@ public class Score : MonoBehaviour
     {
         
     }
+
+    public void addScorePlayer1()
+    {
+        //add one to the blue score
+        Debug.Log ("blue scores a point!");
+        player1Score ++;
+        player1Text.text = "Blue\n" + player1Score;
+
+    }
+
+    public void addScorePlayer2 ()
+    {
+        //add one to the pink score
+        Debug.Log ("Pink scores a point!");
+        player2Score ++;
+        player2Text.text = "Pink\n" + player2Score;
+    }
+
+    public void EndGame()
+    {
+        //turning on the screen at the end
+        EndScreen.SetActive(true);
+
+    // Display the correct winning message based on score
+        if(player1Score > player2Score)
+        {
+            EndText.text = player1win;
+        }
+
+        else if (player1Score < player2Score)
+        {
+            EndText.text = player2win;
+        }
+
+        else
+        {
+            EndText.text = "GAME OVER\n DRAW!";
+        }
+    }
 }
+

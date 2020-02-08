@@ -21,6 +21,15 @@ public class PlayerController : MonoBehaviour
     public float force = 10;
 
     ParticleSystem hitWall;
+
+    public GameObject Prize;
+
+    public GameObject ScoreObj;
+
+    Score ScoringScript;
+
+    GameState gameState;
+
     
 
     #endregion
@@ -39,6 +48,11 @@ public class PlayerController : MonoBehaviour
 
         //Getting the particle system for hitting a wall
         hitWall = GetComponent<ParticleSystem>();
+
+        //getting the scoring script ready for when I need to add score
+        ScoringScript = ScoreObj.GetComponent<Score>();
+
+        gameState = ScoreObj.GetComponent<GameState>();
         
         
     }
@@ -50,15 +64,15 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Goodbye World!");
 
 
-        //Input Code
+        //Input stuff
 
-        //If D is pressed apply a force right
+        //If right is pressed apply a force right
         if(Input.GetKey(RightInput))
         {
             rb2d.AddForce(Vector2.right * force);
         }
 
-        //If A is pressed apply a force left
+        //If left is pressed apply a force left
 
         if(Input.GetKey(LeftInput))
         {
@@ -66,7 +80,7 @@ public class PlayerController : MonoBehaviour
         
         }
     
-        //If W is pressed apply a force up
+        //If up is pressed apply a force up
 
         if(Input.GetKey(UpInput))
         {
@@ -74,12 +88,15 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        //If S is pressed apply a force down
+        //If down is pressed apply a force down
 
         if (Input.GetKey(DownInput))
         {
             rb2d.AddForce (Vector2.down * force);
         }
+
+      
+    
 
     }
 
@@ -90,9 +107,36 @@ public class PlayerController : MonoBehaviour
         {
         Debug.Log ("I have hit a wall");
         hitWall.Play();
+    
+        }
+
+        if (collision.gameObject == Prize && gameState.GameOver == false)
+        {
+            Debug.Log("I have hit the prize");
+          //run the add score section
+            addScore();
+
         }
        
     }
 
 
+    void addScore()
+    {
+        //check which player
+        if(tag == "player1")
+        {
+            //run the score addition
+           ScoringScript.addScorePlayer1();
+        
+        }
+
+        //check which player
+        else if (tag == "player2")
+        {
+            //run the score addition
+            ScoringScript.addScorePlayer2();
+
+        }
+    }
 }

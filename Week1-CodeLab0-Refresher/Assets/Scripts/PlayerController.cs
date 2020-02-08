@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public float force = 10;
 
     ParticleSystem hitWall;
+    
 
     #endregion
 
@@ -38,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
         //Getting the particle system for hitting a wall
         hitWall = GetComponent<ParticleSystem>();
-
+        
         
     }
 
@@ -89,9 +90,8 @@ public class PlayerController : MonoBehaviour
         {
         Debug.Log ("I have hit a wall");
         hitWall.Play();
-
-        
         }
+       
     }
 
 

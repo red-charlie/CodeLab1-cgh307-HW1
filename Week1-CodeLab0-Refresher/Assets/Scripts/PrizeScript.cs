@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class PrizeScript : MonoBehaviour
 {
+
+    ParticleSystem prizeBurst;
+
     // Start is called before the first frame update
     void Start()
     {
+        prizeBurst = GetComponent<ParticleSystem>();
         
     }
 
@@ -19,6 +23,6 @@ public class PrizeScript : MonoBehaviour
     private void OnCollisionEnter2D (Collision2D collsion)
     {
         transform.position = new Vector2 (Random.Range (-6,6), Random.Range(-4,4));
-        
+        prizeBurst.Play();
     }
 }
